@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -24,8 +25,8 @@ import { MenuComponent } from './menu/menu.component';
     FormsModule,
     HttpModule,
     FlexLayoutModule,
-    MatToolbarModule
-    
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
