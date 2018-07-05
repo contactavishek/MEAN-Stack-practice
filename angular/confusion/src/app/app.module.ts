@@ -18,6 +18,7 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { DishsetailComponent } from './dishsetail/dishsetail.component';
+import { DishService} from './services/dish.service';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { DishsetailComponent } from './dishsetail/dishsetail.component';
     MatCardModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [ DishService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
