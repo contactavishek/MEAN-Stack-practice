@@ -11,6 +11,6 @@ $background-pale: #D1C4E9;
 .jumbotron {
     @include zero-margin(70px,30px);
     background: $background-light ;
-    color:floralwhite;
+    color: deeppurple!important;
     min-height: 150px;
 }
