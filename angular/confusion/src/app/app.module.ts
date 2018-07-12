@@ -8,6 +8,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -28,6 +31,8 @@ import { DishService} from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LeaderService } from './shared/leader.service';
+import { LoginComponent } from './login/login.component';
+import { MatDialogModule } from '../../node_modules/@angular/material';
 
 @NgModule({
   declarations: [
@@ -38,11 +43,15 @@ import { LeaderService } from './shared/leader.service';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatCheckboxModule,
     FormsModule,
     HttpModule,
     FlexLayoutModule,
@@ -51,9 +60,11 @@ import { LeaderService } from './shared/leader.service';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule
   ],
   providers: [ DishService, PromotionService, LeaderService],
+  entryComponents: [LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
