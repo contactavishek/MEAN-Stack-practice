@@ -13,6 +13,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -62,7 +65,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatCardModule,
     MatButtonModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [ DishService, PromotionService, LeaderService],
   entryComponents: [LoginComponent],
