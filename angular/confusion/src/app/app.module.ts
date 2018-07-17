@@ -37,6 +37,8 @@ import { LeaderService } from './shared/leader.service';
 import { LoginComponent } from './login/login.component';
 import { MatDialogModule } from '../../node_modules/@angular/material';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatDialogModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [ DishService, PromotionService, LeaderService],
   entryComponents: [LoginComponent],
