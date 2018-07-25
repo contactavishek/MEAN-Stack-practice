@@ -35,7 +35,7 @@ import { PromotionService } from './services/promotion.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LeaderService } from './shared/leader.service';
 import { LoginComponent } from './login/login.component';
-import { MatDialogModule } from '../../node_modules/@angular/material';
+import { MatDialogModule, MatSlider, MatSliderModule } from '../../node_modules/@angular/material';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -71,7 +71,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
   providers: [ DishService, PromotionService, LeaderService],
   entryComponents: [LoginComponent],

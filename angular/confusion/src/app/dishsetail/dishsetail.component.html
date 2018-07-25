@@ -55,10 +55,41 @@
                       <span>-- {{comment.author}} {{ comment.date | date }}</span>
                     </p>
                   </mat-list-item>
-              </mat-list>
+              </mat-list>   
+              <div class="form-size">
+                <!-- <p>{{ reactiveForm.value | json }} </p> -->  
+                  <form novalidate [formGroup]= "reactiveForm" (ngSubmit)="onSubmit()">
+                    <p> 
+                      <mat-form-field class="half-width" 
+                       dividerColor=" {{formErrors.author ? 'warn': 'primary'}} ">
+                      <input matInput formControlName = "author" placeholder="Name" type="text">
+                      <mat-hint>
+                        <span [hidden]= "!(formErrors.author)"> {{formErrors.author}} </span>
+                      </mat-hint>
+                      </mat-form-field>
+                    </p>
+                    <p matline>
+                      <mat-slider-container>
+                        <mat-slider thumbLabel tickInterval="1" min="1" max="5" value="5"></mat-slider>
+                        </mat-slider-container>
+                    </p>
+                    <p>
+                      <mat-form-field class="full-width"
+                      dividerColor=" {{formErrors.comment ? 'warn': 'primary'}} ">
+                        <textarea matInput formControlName = "comment" placeholder="Your Comment" rows=10> 
+                        </textarea>
+                        <mat-hint>
+                          <span [hidden]= "!(formErrors.comment)"> {{formErrors.comment}} </span>
+                          </mat-hint>
+                      </mat-form-field>
+                    </p>
+                    <button type="submit" mat-button class="background-primary text-deep-purple"
+                      [disabled]="reactiveForm.invalid">Submit</button>
+                  </form>
+                </div> 
           </div>
           <div [hidden]="dish">
             <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
           </div>
-        
+          
 </div>
