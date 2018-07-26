@@ -55,10 +55,21 @@
                       <span>-- {{comment.author}} {{ comment.date | date }}</span>
                     </p>
                   </mat-list-item>
+                  <mat-list-item *ngIf="reactiveForm.valid">
+                    <p matLine>
+                      <span> {{reactiveForm.value.comment}}</span>
+                    </p>
+                    <p matLine>
+                      <span> {{reactiveForm.value.rating}} </span>
+                    </p>
+                    <p matLine>
+                      <span>--{{reactiveForm.value.author}} </span>
+                    </p>
+                  </mat-list-item>
               </mat-list>   
               <div class="form-size">
                 <!-- <p>{{ reactiveForm.value | json }} </p> -->  
-                  <form novalidate [formGroup]= "reactiveForm" (ngSubmit)="onSubmit()">
+                  <form novalidate [formGroup]= "reactiveForm" #fform="ngForm" (ngSubmit)="onSubmit()">
                     <p> 
                       <mat-form-field class="half-width" 
                        dividerColor=" {{formErrors.author ? 'warn': 'primary'}} ">
@@ -70,7 +81,8 @@
                     </p>
                     <p matline>
                       <mat-slider-container>
-                        <mat-slider thumbLabel tickInterval="1" min="1" max="5" value="5"></mat-slider>
+                        <mat-slider thumbLabel tickInterval="1" min="1" max="5" value="5"
+                        formControlName="rating"></mat-slider>
                         </mat-slider-container>
                     </p>
                     <p>

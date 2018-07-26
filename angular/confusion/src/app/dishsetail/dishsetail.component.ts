@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dish } from '../shared/dish';
-import { DISHES } from '../shared/dishes';
+
 import { DishService } from '../services/dish.service';
 
 import { Params, ActivatedRoute } from '@angular/router';
@@ -18,6 +18,8 @@ import { Feedback } from '../shared/feedback';
 })
 export class DishsetailComponent implements OnInit {
   
+  @ViewChild('fform') commentFormDirective;
+
   dish: Dish;
   dishIds: number[];
   prev: number;
@@ -45,7 +47,7 @@ export class DishsetailComponent implements OnInit {
     this.reactiveForm = this.rf.group({
       author: ['', [Validators.required, Validators.minLength(2)]],
       comment: ['', Validators.required],
-      rating: ''
+      rating: '5'
     });
     this.reactiveForm.valueChanges.subscribe(data => this.onValueChanged(data));
     this.onValueChanged();  // reset validation messages now
@@ -86,16 +88,18 @@ export class DishsetailComponent implements OnInit {
   };
 
   onSubmit() {
-    this.feedback = this.reactiveForm.value;
-    DISHES.push(this.reactiveForm.value);
-    console.log(DISHES);
+    this.comment = this.reactiveForm.value;
+    let dt = new Date();
+    this.comment.date = dt.toISOString();
+    this.dish.comments.push(this.comment);
+    this.commentFormDirective.resetForm();
     this.reactiveForm.reset({
       author: '',
       comment: '',
       rating: '5'
     });
   }
-
+  
   setPrevNext(dishId: number) {
     let index = this.dishIds.indexOf(dishId);
     this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
