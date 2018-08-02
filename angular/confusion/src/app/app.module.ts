@@ -39,6 +39,9 @@ import { MatDialogModule, MatSlider, MatSliderModule } from '../../node_modules/
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import { HttpClientModule } from '@angular/common/http';
+import { baseURL } from './shared/baseurl';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 @NgModule({
   declarations: [
@@ -72,9 +75,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule,
+    HttpModule
   ],
-  providers: [ DishService, PromotionService, LeaderService],
+  providers: [ DishService, PromotionService, LeaderService, 
+    { provide: 'BaseURL', useValue: baseURL },
+    ProcessHTTPMsgService ],
   entryComponents: [LoginComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
