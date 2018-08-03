@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 
@@ -21,13 +21,15 @@ export class ProcessHTTPMsgService {
   public handleError(error: HttpErrorResponse | any) {
     let errMsg: string;
 
-    if (error.error instanceof ErrorEvent) {
-      errMsg = error.error.message;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
-      errMsg = `${error.status} - ${error.statusText || ''} ${error.error}`;
+      errMsg = error.message ? error.message : error.toString();
     }
 
-    return throwError(errMsg);
+    return Observable.throw(errMsg);
   }
 
 }
