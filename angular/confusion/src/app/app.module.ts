@@ -43,6 +43,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +81,8 @@ import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
     MatProgressSpinnerModule,
     MatSliderModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [ DishService, PromotionService, LeaderService, 
     { provide: 'BaseURL', useValue: baseURL },
