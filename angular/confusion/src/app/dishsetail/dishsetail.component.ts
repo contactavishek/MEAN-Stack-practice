@@ -21,6 +21,7 @@ export class DishsetailComponent implements OnInit {
   @ViewChild('fform') commentFormDirective;
 
   dish: Dish;
+  dishcopy = null;
   dishIds: number[];
   prev: number;
   next: number;
@@ -41,7 +42,7 @@ export class DishsetailComponent implements OnInit {
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params
     .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id);},
+    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id);},
       errmess => this.errMess = <any>errmess);
     
   }
@@ -94,7 +95,8 @@ export class DishsetailComponent implements OnInit {
     this.comment = this.reactiveForm.value;
     let dt = new Date();
     this.comment.date = dt.toISOString();
-    this.dish.comments.push(this.comment);
+    this.dishcopy.comments.push(this.comment);
+    this.dishcopy.save().subscribe(dish => this.dish = dish);
     this.commentFormDirective.resetForm();
     this.reactiveForm.reset({
       author: '',
