@@ -6,6 +6,7 @@ import { DishService } from '../services/dish.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Location } from '@angular/common';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Comment } from '../shared/comment';
 import { Feedback } from '../shared/feedback';
@@ -13,8 +14,20 @@ import { Feedback } from '../shared/feedback';
 @Component({
   selector: 'app-dishsetail',
   templateUrl: './dishsetail.component.html',
-  styleUrls: ['./dishsetail.component.css']
-  
+  styleUrls: ['./dishsetail.component.css'],
+  animations: [
+    trigger('visibility', [
+        state('shown', style({
+            transform: 'scale(1.0)',
+            opacity: 1
+        })),
+        state('hidden', style({
+            transform: 'scale(0.5)',
+            opacity: 0
+        })),
+        transition('* => *', animate('0.5s ease-in-out'))
+    ])
+  ]  
 })
 export class DishsetailComponent implements OnInit {
   
@@ -30,7 +43,7 @@ export class DishsetailComponent implements OnInit {
   reactiveForm: FormGroup;
   feedback : Feedback;
   comment: Comment;
-  
+  visibility = 'shown';
   
   constructor(private dishservice: DishService, private location: Location,
        private route: ActivatedRoute, private rf: FormBuilder, 
@@ -41,8 +54,10 @@ export class DishsetailComponent implements OnInit {
   ngOnInit() {
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params
-    .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id);},
+    .switchMap((params: Params) => { this.visibility = 'hidden'; 
+    return this.dishservice.getDish(+params['id']); })
+    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id);
+    this.visibility = 'shown'; },
       errmess => this.errMess = <any>errmess);
     
   }
